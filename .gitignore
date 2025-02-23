@@ -197,3 +197,6 @@ clean.sh
 *
 !/**/
 !*.*
+
+/.ruff_chache
+/__pycache__
