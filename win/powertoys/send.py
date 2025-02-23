@@ -8,7 +8,7 @@ from PIL import Image
 from toast import balloon_tip
 
 
-UPLOAD_URL = "http://192.168.1.64:1161/drop"
+UPLOAD_URL = "http://192.168.1.73:1161/drop"
 SUCCESS = "./_assets/check.ico"
 ERROR = "./_assets/error.ico"
 EMPTY = "./_assets/empty.ico"
@@ -22,6 +22,7 @@ def send_file(file_path: str) -> bool:
 
     with open(file_path, "rb") as f:
         files = {"file": (os.path.basename(file_path), f)}
+        filename = os.path.basename(file_path).split("\\")[-1]
         
         try:
             response = requests.post(UPLOAD_URL, files=files, headers=headers)
@@ -37,7 +38,7 @@ def send_file(file_path: str) -> bool:
             balloon_tip("Ошибка", error_message, icon_path=ERROR)
             success = False
         else:
-            balloon_tip("", "Отправлено успешно", icon_path=SUCCESS)
+            balloon_tip("", f'Файл "{filename}" отправлен', icon_path=SUCCESS)
             success = True
         finally:
             if response is not None and not success:
