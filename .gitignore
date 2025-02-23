@@ -200,3 +200,6 @@ clean.sh
 
 /.ruff_chache
 /__pycache__
+
+__pycache__/
+.DS_Store
